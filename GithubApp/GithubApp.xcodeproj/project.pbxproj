@@ -22,6 +22,7 @@
 		7625A4DB2721A8DA00B9E526 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4DA2721A8DA00B9E526 /* Repository.swift */; };
 		7625A4DD2721A9FD00B9E526 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4DC2721A9FD00B9E526 /* Owner.swift */; };
 		7625A4E02721AEC700B9E526 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4DF2721AEC700B9E526 /* Secret.swift */; };
+		7625A4E22721B9A700B9E526 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4E12721B9A700B9E526 /* Endpoint.swift */; };
 		ED0FEE096AE40C9801C7C8EA /* Pods_GithubAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443CD752AC77ADAB8BB496F7 /* Pods_GithubAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		7625A4DA2721A8DA00B9E526 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		7625A4DC2721A9FD00B9E526 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		7625A4DF2721AEC700B9E526 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		7625A4E12721B9A700B9E526 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		D17B1BDD98194A84E759A794 /* Pods-GithubApp-GithubAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubApp-GithubAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-GithubApp-GithubAppUITests/Pods-GithubApp-GithubAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		ECA5D814B4B33FF20AD4E29C /* Pods-GithubApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubApp.release.xcconfig"; path = "Target Support Files/Pods-GithubApp/Pods-GithubApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,6 +223,7 @@
 		7625A4DE2721AC4000B9E526 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				7625A4E12721B9A700B9E526 /* Endpoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7625A4E22721B9A700B9E526 /* Endpoint.swift in Sources */,
 				7625A4A627218F8700B9E526 /* ViewController.swift in Sources */,
 				7625A4E02721AEC700B9E526 /* Secret.swift in Sources */,
 				7625A4A227218F8700B9E526 /* AppDelegate.swift in Sources */,
