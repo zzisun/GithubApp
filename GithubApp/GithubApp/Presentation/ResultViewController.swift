@@ -63,13 +63,11 @@ extension ResultViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryCell.id, for: indexPath) as! RepositoryCell
         let repository = repositories?[indexPath.row]
         
-        // cell 내부의 함수에서 하도록! 추상화
-        let imageData = try? Data(contentsOf: URL(string: repository?.owner.avatarURL ?? "https://avatars.githubusercontent.com/u/60323625?v=4")!)
-        cell.ownerImageView.image = UIImage(data: imageData!)
+        cell.ownerImageView.image = RepositoryCell.image(with: repository?.owner.avatarURL)
         cell.ownerNameLabel.text = repository?.owner.name
         cell.repositoryNameLabel.text = repository?.name
         cell.repositoryDescriptionLabel.text = repository?.description
-        cell.starCountLabel.text = "\(repository?.starCount ?? -1)"
+        cell.starCountLabel.text = RepositoryCell.starCount(with: repository?.starCount)
         cell.languageLabel.text = repository?.language
         
         return cell
