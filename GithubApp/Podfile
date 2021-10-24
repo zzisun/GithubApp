@@ -8,7 +8,7 @@ target 'GithubApp' do
   # Pods for GithubApp
 pod 'SwiftLint'
 pod 'Alamofire'
-
+pod 'SnapKit'
   target 'GithubAppTests' do
     inherit! :search_paths
     # Pods for testing

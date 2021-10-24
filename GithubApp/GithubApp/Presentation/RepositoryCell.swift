@@ -12,19 +12,37 @@ final class RepositoryCell: UITableViewCell {
     static let id = "RepositoryCell"
     
     let ownerStackView = UIStackView()
-    let repositoryName = UILabel()
-    let repositoryDescription = UILabel()
-    let extraStackView = UIStackView()
+    let ownerNameImage = UIImageView()
+    let ownerNameLabel = UILabel()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    let repositoryNameLabel = UILabel()
+    let repositoryDescriptionLabel = UILabel()
+    
+    let extraStackView = UIStackView()
+    let starImage = UIImage(systemName: "star.fill")
+    let starCountLabel = UILabel()
+    let languageLabel = UILabel()
+    
+    func layout() {
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("error")
+    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//    }
+//
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
 
 }
