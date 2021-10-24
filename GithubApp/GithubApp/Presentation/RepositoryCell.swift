@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RepositoryCell: UITableViewCell {
+final class RepositoryCell: UITableViewCell {
     static let id = "RepositoryCell"
 
     @IBOutlet weak var ownerImageView: UIImageView!
