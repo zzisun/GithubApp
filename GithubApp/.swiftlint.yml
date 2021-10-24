@@ -3,6 +3,7 @@ disabled_rules:
 - unused_optional_binding
 - trailing_whitespace
 - vertical_parameter_alignment
+- identifier_name
 included:
 excluded:
 - Pods
