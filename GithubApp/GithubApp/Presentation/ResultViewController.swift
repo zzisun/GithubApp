@@ -38,7 +38,7 @@ final class ResultViewController: UIViewController {
     private func setTableView() {
         tableView = UITableView()
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        registerXib()
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +46,11 @@ final class ResultViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    private func registerXib() {
+        let nibName = UINib(nibName: RepositoryCell.id, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: RepositoryCell.id)
     }
 }
 
@@ -55,8 +60,15 @@ extension ResultViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = repositories?[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryCell.id, for: indexPath) as! RepositoryCell
+        let repository = repositories?[indexPath.row]
+        // cell 내부의 함수에서 하도록! 추상화
+        cell.ownerNameLabel.text = repository?.owner.name
+        cell.repositoryNameLabel.text = repository?.name
+        cell.repositoryDescriptionLabel.text = repository?.description
+        cell.starCountLabel.text = "\(repository?.starCount ?? -1)"
+        cell.languageLabel.text = repository?.language
+        
         return cell
     }
 }
