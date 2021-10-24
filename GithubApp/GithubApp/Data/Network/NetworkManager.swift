@@ -19,21 +19,19 @@ struct NetworkManager: NetworkManagable {
             guard let statusCode = dataResponse.response?.statusCode else {
                             return completionHandler(.failure(NetworkError.internet))
                         }
-                        switch statusCode {
-                        case 200..<300:
-                            guard let data = dataResponse.value else {
-                                return completionHandler(.failure(NetworkError.noResult))
-                            }
-                            completionHandler(.success(data))
-                        case 300..<400:
-                            completionHandler(.failure(NetworkError.noResult))
-                        case 400..<500:
-                            completionHandler(.failure(NetworkError.notAllowed))
-                        case 500...:
-                            completionHandler(.failure(NetworkError.server))
-                        default:
-                            completionHandler(.failure(NetworkError.unknown))
-                        }
+            switch statusCode {
+            case 200..<300:
+                guard let data = dataResponse.value else { return }
+                completionHandler(.success(data))
+            case 300..<400:
+                completionHandler(.failure(NetworkError.notModified))
+            case 400..<500:
+                completionHandler(.failure(NetworkError.validationFailed))
+            case 500...:
+                completionHandler(.failure(NetworkError.serviceUnavailable))
+            default:
+                completionHandler(.failure(NetworkError.unknown))
+            }
         }
     }
 }

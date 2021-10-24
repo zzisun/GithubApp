@@ -9,9 +9,9 @@ import Foundation
 
 enum NetworkError: Int, Error {
     case internet
-    case notModified = 304
-    case validationFailed = 422
-    case serviceUnavailable = 503
+    case notModified
+    case validationFailed
+    case serviceUnavailable 
     case unknown
 }
 
