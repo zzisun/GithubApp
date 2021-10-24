@@ -1,6 +1,8 @@
 disabled_rules:
 - line_length
 - unused_optional_binding
+- trailing_whitespace
+- vertical_parameter_alignment
 included:
 excluded:
 - Pods
