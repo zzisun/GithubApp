@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-struct RequestManager {
+struct RequestManager: RequestManagable {
     private let headers: HTTPHeaders = ["Authorization": "token \(Token.data)"]
     
     func request(for method: HTTPMethod, query: String) -> DataRequest {

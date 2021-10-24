@@ -8,12 +8,13 @@
 import Foundation
 import Alamofire
 
-struct NetworkManager {
+struct NetworkManager: NetworkManagable {
     let requestManager = RequestManager()
     
-    func search<T: Decodable>(decodingType: T.Type,
+    func search<T: Decodable>(query: String,
+                              decodingType: T.Type,
                              completionHandler: @escaping (Result<T, NetworkError>) -> Void) {
-        let request = requestManager.request(for: .get, query: "WorldAfterCapital")
+        let request = requestManager.request(for: .get, query: query)
         request.responseDecodable(of: decodingType) { dataResponse in
             print(dataResponse)
         }

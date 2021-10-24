@@ -24,6 +24,8 @@
 		7625A4E02721AEC700B9E526 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4DF2721AEC700B9E526 /* Secret.swift */; };
 		7625A4E22721B9A700B9E526 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4E12721B9A700B9E526 /* Endpoint.swift */; };
 		7625A4E42721C0A600B9E526 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4E32721C0A600B9E526 /* NetworkError.swift */; };
+		764662F627250AF900F2DD84 /* NetworkManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764662F527250AF900F2DD84 /* NetworkManagable.swift */; };
+		764662F827250B3900F2DD84 /* RequestManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764662F727250B3800F2DD84 /* RequestManagable.swift */; };
 		76936DB32722768F00CB29C0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76936DB22722768F00CB29C0 /* NetworkManager.swift */; };
 		76936DB527227B4E00CB29C0 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76936DB427227B4E00CB29C0 /* RequestManager.swift */; };
 		ED0FEE096AE40C9801C7C8EA /* Pods_GithubAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443CD752AC77ADAB8BB496F7 /* Pods_GithubAppTests.framework */; };
@@ -73,6 +75,8 @@
 		7625A4DF2721AEC700B9E526 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		7625A4E12721B9A700B9E526 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		7625A4E32721C0A600B9E526 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		764662F527250AF900F2DD84 /* NetworkManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagable.swift; sourceTree = "<group>"; };
+		764662F727250B3800F2DD84 /* RequestManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagable.swift; sourceTree = "<group>"; };
 		76936DB22722768F00CB29C0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		76936DB427227B4E00CB29C0 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		D17B1BDD98194A84E759A794 /* Pods-GithubApp-GithubAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubApp-GithubAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-GithubApp-GithubAppUITests/Pods-GithubApp-GithubAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 				7625A4E32721C0A600B9E526 /* NetworkError.swift */,
 				76936DB22722768F00CB29C0 /* NetworkManager.swift */,
 				76936DB427227B4E00CB29C0 /* RequestManager.swift */,
+				764662F527250AF900F2DD84 /* NetworkManagable.swift */,
+				764662F727250B3800F2DD84 /* RequestManagable.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -511,8 +517,10 @@
 				7625A4A627218F8700B9E526 /* ViewController.swift in Sources */,
 				7625A4E02721AEC700B9E526 /* Secret.swift in Sources */,
 				7625A4A227218F8700B9E526 /* AppDelegate.swift in Sources */,
+				764662F827250B3900F2DD84 /* RequestManagable.swift in Sources */,
 				7625A4A427218F8700B9E526 /* SceneDelegate.swift in Sources */,
 				76936DB527227B4E00CB29C0 /* RequestManager.swift in Sources */,
+				764662F627250AF900F2DD84 /* NetworkManagable.swift in Sources */,
 				7625A4DD2721A9FD00B9E526 /* Owner.swift in Sources */,
 				7625A4DB2721A8DA00B9E526 /* Repository.swift in Sources */,
 			);

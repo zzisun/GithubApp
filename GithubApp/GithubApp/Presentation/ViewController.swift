@@ -10,10 +10,11 @@ import UIKit
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         let networkManager = NetworkManager()
-        networkManager.search(decodingType: Results.self) { response in
+        networkManager.search(query: "WorldAfterCapital", decodingType: Results.self) { response in
             print(response)
         }
+        
     }
 }
