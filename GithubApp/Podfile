@@ -11,5 +11,5 @@ pod 'Alamofire'
 pod 'SnapKit'
 pod 'RxSwift'
 pod 'RxCocoa'
-
+pod 'RxViewController'
 end

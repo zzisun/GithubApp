@@ -7,9 +7,12 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
-struct NetworkManager: NetworkManagable {
-    let requestManager = RequestManager()
+final class NetworkManager: NetworkManagable {
+    static let shared = NetworkManager()
+    
+    private let requestManager = RequestManager()
     
     func search<T: Decodable>(query: String,
                               decodingType: T.Type,
@@ -32,6 +35,21 @@ struct NetworkManager: NetworkManagable {
             default:
                 completionHandler(.failure(NetworkError.unknown))
             }
+        }
+    }
+    
+    func fetchDataObservable<T: Decodable>(query: String, decodingType: T.Type) -> Observable<T> {
+        return Observable.create { emitter in
+            NetworkManager.shared.search(query: query, decodingType: T.self) { result in
+                switch result {
+                case .success(let data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case .failure(let error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
         }
     }
 }

@@ -8,13 +8,13 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
         setSearchController()        
     }
-    
+    // MARK: - UI
     private func configure() {
         view.backgroundColor = .systemBackground
         navigationItem.title = "Home"
@@ -35,8 +35,8 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else {return}
-        let resultViewController = ResultViewController()
-        resultViewController.query = query
+        let repositoryViewModel = RepositoryViewModel(query: query)
+        let resultViewController = ResultViewController(viewModel: repositoryViewModel) 
         navigationController?.pushViewController(resultViewController, animated: false)
     }
 }

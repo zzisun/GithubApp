@@ -13,8 +13,6 @@ struct RequestManager: RequestManagable {
     
     func request(for method: HTTPMethod, query: String) -> DataRequest {
         let endpoint = Endpoint.search(query: query)
-        
-        // endpoint.url = nil인 경우 bad request로 처리하기
         return AF.request(endpoint.url!, method: method, headers: headers)
     }
 }

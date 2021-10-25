@@ -4,7 +4,6 @@ disabled_rules:
 - trailing_whitespace
 - vertical_parameter_alignment
 - identifier_name
-- force_cast
 included:
 excluded:
 - Pods
