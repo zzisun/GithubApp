@@ -12,7 +12,6 @@ import UIKit
 import SnapKit
 
 final class ResultViewController: UIViewController {
-    var query: String? // private로 변경필요, nil값 안오기에 optional일 필요없다
     let viewModel: RepositoryViewModelType
     var disposeBag = DisposeBag()
     
@@ -23,7 +22,7 @@ final class ResultViewController: UIViewController {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = RepositoryViewModel(query: query ?? " ") // required init 어떤애인지 - 여기 언제 실행되는지
+        viewModel = RepositoryViewModel(query: " ") 
         super.init(coder: aDecoder)
     }
     
@@ -70,10 +69,27 @@ final class ResultViewController: UIViewController {
     }
     
     func setupBinding() {
+        viewModel.errorMessage
+            .map { "\($0)" }
+            .subscribe(onNext: {[weak self] message in
+                self?.showAlert( message)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.activated
+            .map { !$0 }
+            .do(onNext: { [weak self] finished in
+                if finished {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            })
+            .bind(to: activityIndicator.rx.isHidden)
+            .disposed(by: disposeBag)
+                
         viewModel.repositories
             .bind(to: tableView.rx.items(cellIdentifier: RepositoryCell.id,
                                          cellType: RepositoryCell.self)) { _, repository, cell in
-                self.loadImage(from: repository.owner.avatarURL)
+                ImageLoadManager.load(from: repository.owner.avatarURL)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { image in
                         cell.ownerImageView.image = image
@@ -86,27 +102,16 @@ final class ResultViewController: UIViewController {
                 cell.starCountLabel.text = RepositoryCell.starCount(with: repository.starCount)
                 cell.languageLabel.text = repository.language
             }.disposed(by: disposeBag)
-        
-//        viewModel.activated
-//            .map { !$0 }
-//            .do(onNext: { [weak self] finished in
-//                if finished {
-//                    self?.tableView.refreshControl?.endRefreshing()
-//                }
-//            })
-//            .bind(to: activityIndicator.rx.isHidden)
-//            .disposed(by: disposeBag)
-                
     }
 }
 
 extension ResultViewController {
-    func loadImage(from imageURL: String) -> Observable<UIImage?> {
-        return Observable.just(imageURL)
-            .observe(on: ConcurrentDispatchQueueScheduler(qos: .default))
-            .map { URL(string: $0) }
-            .filter { $0 != nil }
-            .map { try Data(contentsOf: $0!) }
-            .map { UIImage(data: $0) }
+    func showAlert(_ message: String) {
+        let alertVC = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        alertVC.addAction(okAction)
+        present(alertVC, animated: true, completion: nil)
     }
 }

@@ -10,36 +10,33 @@ import RxSwift
 
 protocol RepositoryViewModelType {
     var query: String { get }
-//    var fetchRepositories: AnyObserver<Void> { get }
-//
-//    var activated: Observable<Bool> { get }
-//    var errorMessage: Observable<NetworkError> { get }
     var repositories: BehaviorSubject<[Repository]> { get }
+    var activated: Observable<Bool> { get }
+    var errorMessage: Observable<NetworkError> { get }
 }
 
 class RepositoryViewModel: RepositoryViewModelType {
-let disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     var query: String
-    // INPUT
-//    let fetchRepositories: AnyObserver<Void>
-//
-//    // OUTPUT
-//    let activated: Observable<Bool>
-//    let errorMessage: Observable<NetworkError>
-    let repositories = BehaviorSubject<[Repository]>(value: [])
+    
+    let repositories: BehaviorSubject<[Repository]>
+    let activated: Observable<Bool>
+    let errorMessage: Observable<NetworkError>
     
     init(query: String, domain: RepositoryFetchable = RepositoryUsecase()) {
         self.query = query
-//        let repositoriesSubject = BehaviorSubject<[Repository]>(value: [])
-//        let activating = BehaviorSubject<Bool>(value: false)
-//        let errorSubject = PublishSubject<NetworkError>()
-//        repositories.onNext(domain.fetchRepositories(query: query))
+        repositories = BehaviorSubject<[Repository]>(value: [])
+        let activating = BehaviorSubject<Bool>(value: false)
+        let errorSubject = PublishSubject<NetworkError>()
+        
+        activating.onNext(true)
         domain.fetchRepositories(query: query)
-            .subscribe(onNext: {
-                self.repositories.onNext($0)
-            }).disposed(by: disposeBag)
-
-//        activated = activating.distinctUntilChanged()
-//        errorMessage = errorSubject
+            .do(onNext: { _ in activating.onNext(false) })
+                .do(onError: { error in errorSubject.onNext((error as? NetworkError) ?? NetworkError.unknown) })
+            .subscribe(onNext: repositories.onNext)
+            .disposed(by: disposeBag)
+        
+        activated = activating.distinctUntilChanged()
+        errorMessage = errorSubject
     }
 }

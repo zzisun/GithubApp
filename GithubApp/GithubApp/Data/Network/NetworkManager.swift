@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import RxSwift
 
-class NetworkManager: NetworkManagable {
+final class NetworkManager: NetworkManagable {
     static let shared = NetworkManager()
     
     private let requestManager = RequestManager()
@@ -46,7 +46,7 @@ class NetworkManager: NetworkManagable {
                     emitter.onNext(data)
                     emitter.onCompleted()
                 case .failure(let error):
-                    emitter.onError(error as NetworkError)
+                    emitter.onError(error)
                 }
             }
             return Disposables.create()
