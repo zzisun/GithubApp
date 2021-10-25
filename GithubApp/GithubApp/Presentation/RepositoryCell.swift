@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class RepositoryCell: UITableViewCell {
     static let id = "RepositoryCell"
@@ -19,13 +20,6 @@ final class RepositoryCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    static func image(with urlString: String?) -> UIImage? {
-        let urlString = urlString ?? "https://avatars.githubusercontent.com/u/60323625?v=4"
-        guard let url = URL(string: urlString) else {return nil}
-        guard let imageData = try? Data(contentsOf: url) else { return nil }
-        return UIImage(data: imageData)
     }
     
     static func starCount(with starCount: Int?) -> String {

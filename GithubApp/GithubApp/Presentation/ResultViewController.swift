@@ -52,7 +52,7 @@ final class ResultViewController: UIViewController {
     }
 }
 
-extension ResultViewController: UITableViewDataSource, UITableViewDelegate {
+extension ResultViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return totalCount ?? 0
     }
@@ -60,8 +60,9 @@ extension ResultViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryCell.id, for: indexPath) as! RepositoryCell
         let repository = repositories?[indexPath.row]
-        
-        cell.ownerImageView.image = RepositoryCell.image(with: repository?.owner.avatarURL)
+        downloadImage((repository?.owner.avatarURL)!) { image in
+            cell.ownerImageView.image = image
+        }
         cell.ownerNameLabel.text = repository?.owner.name
         cell.repositoryNameLabel.text = repository?.name
         cell.repositoryDescriptionLabel.text = repository?.description
@@ -69,5 +70,18 @@ extension ResultViewController: UITableViewDataSource, UITableViewDelegate {
         cell.languageLabel.text = repository?.language
         
         return cell
+    }
+}
+
+extension ResultViewController {
+    func downloadImage(_ url: String, _ completion: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global().async {
+            let url = URL(string: url)!
+            let imageData = try? Data(contentsOf: url)
+            let image = UIImage(data: imageData!)
+            DispatchQueue.main.async {
+                completion(image)
+            }
+        }
     }
 }
