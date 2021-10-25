@@ -16,7 +16,7 @@ protocol RepositoryViewModelType {
 }
 
 class RepositoryViewModel: RepositoryViewModelType {
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     var query: String
     
     let repositories: BehaviorSubject<[Repository]>
