@@ -68,7 +68,7 @@ final class ResultViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: RepositoryCell.id)
     }
     
-    func setupBinding() {
+    private func setupBinding() {
         viewModel.errorMessage
             .map { "\($0)" }
             .subscribe(onNext: {[weak self] message in
@@ -102,16 +102,5 @@ final class ResultViewController: UIViewController {
                 cell.starCountLabel.text = RepositoryCell.starCount(with: repository.starCount)
                 cell.languageLabel.text = repository.language
             }.disposed(by: disposeBag)
-    }
-}
-
-extension ResultViewController {
-    func showAlert(_ message: String) {
-        let alertVC = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        alertVC.addAction(okAction)
-        present(alertVC, animated: true, completion: nil)
     }
 }

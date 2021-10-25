@@ -8,13 +8,13 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
         setSearchController()        
     }
-    
+    // MARK: - UI
     private func configure() {
         view.backgroundColor = .systemBackground
         navigationItem.title = "Home"
