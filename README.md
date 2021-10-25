@@ -1,6 +1,6 @@
 # GithubApp
 
-마켓컬리 사전과제 
+마켓컬리 사전과제 💟
 
 > 사용자가 입력한 검색어를 이용하여 GitHub 에서 리포지토리를 검색하고, 결과를 목록으로 표시합니다.
 
@@ -16,17 +16,25 @@
 
 * GitHub 의 Issues 를 이용하여 이슈 기반으로 작업을 진행하였습니다.
 
-* 다음의 [Commit Rule](https://github.com/zzisun/GithubApp.wiki.git) 을 적용하여 커밋을 관리하였습니다.
+* 다음의 [Commit Rule](https://github.com/zzisun/GithubApp/wiki/Commit-Rule) 을 적용하여 커밋을 관리하였습니다.
 
 
 
 ## 기본동작
 
-* 검색창에 검색어를 입력한 뒤 키보드의 search버튼을 눌러 리포지토리를 검색하고, 결과를 tableView를 사용하여 목록으로 표시합니다.
-
 **iPhone12 구동화면**
 
-<img src="https://user-images.githubusercontent.com/60323625/138777728-172229be-8a2f-4d6b-be26-3a0add8db225.gif" alt="앱의 전반적인 흐름" width=280>
+* 검색창에 검색어를 입력한 뒤 키보드의 search버튼을 눌러 리포지토리를 검색하고, 
+
+  결과를 tableView를 사용하여 목록으로 표시합니다.
+
+
+
+​<img src="https://user-images.githubusercontent.com/60323625/138777728-172229be-8a2f-4d6b-be26-3a0add8db225.gif" alt="앱의 전반적인 흐름" width=280>
+
+* 검색창에 검색어를 입력하지 않고 리포지토리를 검색하는 경우와 같이 오류가 발생하면 alert창을 띄워 사용자에게 알린 뒤 이전화면으로 돌아가게 됩니다.
+
+<img src="https://user-images.githubusercontent.com/60323625/138783994-8a5f162c-766d-4cd4-a1d2-a3d667418e90.gif" alt="앱의 전반적인 흐름" width=280>
 
 
 
@@ -38,15 +46,23 @@
 
 * Data 레이어
 
-  networkManager 싱글톤 패턴 적용
+  networkManager에 싱글톤 패턴을 적용하여 `networkManager`가 하나의 인스턴스만 존재하도록 구현했습니다.
+
+  `Alamofire` 라이브러리 사용하여 response decoding 부분을 간결하게 구현하였습니다.
 
 * Domain 레이어
 
+  * Entity
 
+    Decodable한 모델을 선언하였습니다. 
+
+  * Usecase
 
 * Presentation 레이어
 
-  
+  * ViewModel
+  * View
+  * ViewController
 
 ### 2. MVVM
 
@@ -62,15 +78,15 @@
 
 ### 4. Autolayout, 화면 구성 방법
 
-* 코드를 기반으로 UI를 구현하였습니다.
+* 코드를 기반으로 UI를 구현하였습니다. 
 
-* SnapKit을 사용하여 tableView
+* SnapKit을 직관적이고 간결하게 autolayout을 구현하였습니다.
 
-* TableViewCell 커스텀
+* xib를 사용하여 TableViewCell 커스텀하여 RepositoryCell을 구현하였습니다.
 
-  xib를 사용하였습니다.
+  stackView로 최대한 item들을 묶어 사용하여 constraint의 개수를 줄였습니다.
 
-  stackView를 사용하여 
+  hugging priority 를 사용하여 Repository의 description길이에 따라 UI layout이 변할 수 있도록 구현하였습니다.
 
 | iPod touch (7th gen)                                         | iPhone 8                                                     | iPhone 12                                                    |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
