@@ -7,11 +7,12 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 struct NetworkManager: NetworkManagable {
-    let requestManager = RequestManager()
+    static let requestManager = RequestManager() // static이 어색한데,,ㅠ
     
-    func search<T: Decodable>(query: String,
+    static func search<T: Decodable>(query: String,
                               decodingType: T.Type,
                              completionHandler: @escaping (Result<T, NetworkError>) -> Void) {
         let request = requestManager.request(for: .get, query: query)
@@ -32,6 +33,21 @@ struct NetworkManager: NetworkManagable {
             default:
                 completionHandler(.failure(NetworkError.unknown))
             }
+        }
+    }
+    
+    static func fetchResultsObservable(query: String) -> Observable<Results> {
+        return Observable.create { emitter in
+            NetworkManager.search(query: query, decodingType: Results.self) { result in
+                switch result {
+                case .success(let results):
+                    emitter.onNext(results)
+                    emitter.onCompleted()
+                case .failure(let error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
         }
     }
 }

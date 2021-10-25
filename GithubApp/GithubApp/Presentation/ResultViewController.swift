@@ -5,36 +5,47 @@
 //  Created by 김지선 on 2021/10/24.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 import SnapKit
-import RxSwift
 
 final class ResultViewController: UIViewController {
-    
     var query: String? // private로 변경필요, nil값 안오기에 optional일 필요없다
-    var totalCount: Int = 0
-    var repositories: [Repository] = []
+
     var tableView: UITableView!
+    var activityIndicator: UIActivityIndicatorView!
     
     let viewModel = ResultViewModel()
     
+    let repositories: BehaviorRelay<[Repository]> = BehaviorRelay(value: [])
     var disposeBag = DisposeBag()
-
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        setTableView()
+        setupBinding()
         fetchResults()
     }
     
+    // MARK: - UI
     private func configure() {
+        setNavigationBar()
+        setTableView()
+    }
+    
+    private func setNavigationBar() {
         navigationItem.title = "Repositories"
         navigationItem.hidesBackButton = true
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 20, width: 20, height: 20))
+        let barButton = UIBarButtonItem(customView: activityIndicator)
+        self.navigationItem.setRightBarButton(barButton, animated: true)
+        activityIndicator.isHidden = true
     }
     
     private func setTableView() {
         tableView = UITableView()
-        tableView.dataSource = self
         registerXib()
         view.addSubview(tableView)
         
@@ -47,44 +58,39 @@ final class ResultViewController: UIViewController {
         let nibName = UINib(nibName: RepositoryCell.id, bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: RepositoryCell.id)
     }
-}
-
-extension ResultViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return totalCount
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryCell.id, for: indexPath) as! RepositoryCell
-        let repository = repositories[indexPath.row]
-        loadImage(repository.owner.avatarURL) { image in
-            cell.ownerImageView.image = image
-        }
-        cell.ownerNameLabel.text = repository.owner.name
-        cell.repositoryNameLabel.text = repository.name
-        cell.repositoryDescriptionLabel.text = repository.description
-        cell.starCountLabel.text = RepositoryCell.starCount(with: repository.starCount)
-        cell.languageLabel.text = repository.language
-        
-        return cell
+    func setupBinding() {
+        repositories
+            .bind(to: tableView.rx.items(cellIdentifier: RepositoryCell.id,
+                                         cellType: RepositoryCell.self)) { _, repository, cell in
+                self.loadImage(repository.owner.avatarURL) { image in
+                    cell.ownerImageView.image = image
+                }
+                cell.ownerNameLabel.text = repository.owner.name
+                cell.repositoryNameLabel.text = repository.name
+                cell.repositoryDescriptionLabel.text = repository.description
+                cell.starCountLabel.text = RepositoryCell.starCount(with: repository.starCount)
+                cell.languageLabel.text = repository.language
+            }.disposed(by: disposeBag)
     }
 }
 
 extension ResultViewController {
     func fetchResults() {
-        let networkManager = NetworkManager()
-        networkManager.search(query: query!, decodingType: Results.self) { [weak self] result in
-            switch result {
-            case .failure(let error):
-                self?.showAlert("Fetch Fail", "\(error)")
-            case .success(let results):
-                self?.totalCount = results.totalCount
-                self?.repositories = results.items
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        NetworkManager.fetchResultsObservable(query: query!)
+            .map { results in
+                return results.items
             }
-        }
+            .observe(on: MainScheduler.instance)
+            .do(onError: { [weak self] error in
+                self?.showAlert("Fetch Fail", "\(error)")
+            }, onDispose: {
+                self.activityIndicator.isHidden = true
+            })
+            .bind(to: repositories)
+            .disposed(by: disposeBag)
     }
                 
     func showAlert(_ title: String, _ message: String) {
