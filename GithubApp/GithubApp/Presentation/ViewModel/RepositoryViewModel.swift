@@ -37,7 +37,7 @@ let disposeBag = DisposeBag()
         domain.fetchRepositories(query: query)
             .subscribe(onNext: {
                 self.repositories.onNext($0)
-            })
+            }).disposed(by: disposeBag)
 
 //        activated = activating.distinctUntilChanged()
 //        errorMessage = errorSubject

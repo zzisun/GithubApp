@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol NetworkManagable {
-    static func search<T: Decodable>(query: String,
+    func search<T: Decodable>(query: String,
                               decodingType: T.Type,
-                             completionHandler: @escaping (Result<T, NetworkError>) -> Void) 
+                             completionHandler: @escaping (Result<T, NetworkError>) -> Void)
+    func fetchDataObservable<T: Decodable>(query: String, decodingType: T.Type) -> Observable<T>
 }
