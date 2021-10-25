@@ -36,16 +36,7 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else {return}
         let resultViewController = ResultViewController()
-        let networkManager = NetworkManager()
-        networkManager.search(query: query, decodingType: Results.self) { [self] data in
-            do {
-                try resultViewController.totalCount = data.get().totalCount
-                try resultViewController.repositories = data.get().items
-                navigationController?.pushViewController(resultViewController, animated: false)
-            } catch {
-                print("error")
-            }
-        }
-//        navigationController?.pushViewController(resultViewController, animated: false)
+        resultViewController.query = query
+        navigationController?.pushViewController(resultViewController, animated: false)
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxSwift
 
 final class RepositoryCell: UITableViewCell {
     static let id = "RepositoryCell"
