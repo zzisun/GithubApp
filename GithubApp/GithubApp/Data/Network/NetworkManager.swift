@@ -36,12 +36,12 @@ struct NetworkManager: NetworkManagable {
         }
     }
     
-    static func fetchResultsObservable(query: String) -> Observable<Results> {
+    static func fetchResultsObservable<T: Decodable>(query: String, decodingType: T.Type) -> Observable<T> {
         return Observable.create { emitter in
-            NetworkManager.search(query: query, decodingType: Results.self) { result in
+            NetworkManager.search(query: query, decodingType: T.self) { result in
                 switch result {
-                case .success(let results):
-                    emitter.onNext(results)
+                case .success(let data):
+                    emitter.onNext(data)
                     emitter.onCompleted()
                 case .failure(let error):
                     emitter.onError(error)

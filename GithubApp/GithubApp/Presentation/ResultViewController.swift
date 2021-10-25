@@ -35,9 +35,8 @@ final class ResultViewController: UIViewController {
     }
     
     private func setNavigationBar() {
-        navigationItem.title = "Repositories"
-        navigationItem.hidesBackButton = true
-        
+        navigationItem.title = "Repositories" 
+        navigationController?.navigationBar.prefersLargeTitles = false
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 20, width: 20, height: 20))
         let barButton = UIBarButtonItem(customView: activityIndicator)
         self.navigationItem.setRightBarButton(barButton, animated: true)
@@ -79,7 +78,7 @@ extension ResultViewController {
     func fetchResults() {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        NetworkManager.fetchResultsObservable(query: query!)
+        NetworkManager.fetchResultsObservable(query: query!, decodingType: Results.self)
             .map { results in
                 return results.items
             }
