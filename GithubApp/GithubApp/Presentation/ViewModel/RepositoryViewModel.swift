@@ -8,27 +8,38 @@
 import Foundation
 import RxSwift
 
-protocol RepositoriesViewModelType {
-    var fetchResults: AnyObserver<Void> { get }
-    
-    var activated: Observable<Bool> { get }
-    var errorMessage: Observable<NSError> { get }
-    var repositories: Observable<[Repository]> { get }
+protocol RepositoryViewModelType {
+    var query: String { get }
+//    var fetchRepositories: AnyObserver<Void> { get }
+//
+//    var activated: Observable<Bool> { get }
+//    var errorMessage: Observable<NetworkError> { get }
+    var repositories: BehaviorSubject<[Repository]> { get }
 }
 
-class RepositoriesViewModel: RepositoriesViewModelType {
-    let disposeBag = DisposeBag()
-    
+class RepositoryViewModel: RepositoryViewModelType {
+let disposeBag = DisposeBag()
+    var query: String
     // INPUT
-    let fetchResults: AnyObserver<Void>
+//    let fetchRepositories: AnyObserver<Void>
+//
+//    // OUTPUT
+//    let activated: Observable<Bool>
+//    let errorMessage: Observable<NetworkError>
+    let repositories = BehaviorSubject<[Repository]>(value: [])
     
-    // OUTPUT
-    let activated: Observable<Bool>
-    let errorMessage: Observable<NSError>
-    let repositories: Observable<[Repository]>
-    
-    init(domain: RepositoriesFetchable = RepositoriesUsecase()) {
-        let fetching = PublishSubject<Void>()
+    init(query: String, domain: RepositoryFetchable = RepositoryUsecase()) {
+        self.query = query
+//        let repositoriesSubject = BehaviorSubject<[Repository]>(value: [])
+//        let activating = BehaviorSubject<Bool>(value: false)
+//        let errorSubject = PublishSubject<NetworkError>()
+//        repositories.onNext(domain.fetchRepositories(query: query))
+        domain.fetchRepositories(query: query)
+            .subscribe(onNext: {
+                self.repositories.onNext($0)
+            })
+
+//        activated = activating.distinctUntilChanged()
+//        errorMessage = errorSubject
     }
-    
 }

@@ -2,10 +2,10 @@ import Foundation
 
 struct Results: Decodable {
     let totalCount: Int
-    let items: [Repository]
+    let repositories: [Repository]
     
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
-        case items
+        case repositories = "items"
     }
 }

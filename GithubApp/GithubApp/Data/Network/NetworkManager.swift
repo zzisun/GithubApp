@@ -10,7 +10,7 @@ import Alamofire
 import RxSwift
 
 struct NetworkManager: NetworkManagable {
-    static let requestManager = RequestManager() // static이 어색한데,,ㅠ
+    static let requestManager = RequestManager() // static이 어색한데,,ㅠ 고쳐라!!!
     
     static func search<T: Decodable>(query: String,
                               decodingType: T.Type,
@@ -36,7 +36,7 @@ struct NetworkManager: NetworkManagable {
         }
     }
     
-    static func fetchResultsObservable<T: Decodable>(query: String, decodingType: T.Type) -> Observable<T> {
+    static func fetchDataObservable<T: Decodable>(query: String, decodingType: T.Type) -> Observable<T> {
         return Observable.create { emitter in
             NetworkManager.search(query: query, decodingType: T.self) { result in
                 switch result {
@@ -44,7 +44,7 @@ struct NetworkManager: NetworkManagable {
                     emitter.onNext(data)
                     emitter.onCompleted()
                 case .failure(let error):
-                    emitter.onError(error)
+                    emitter.onError(error as NetworkError)
                 }
             }
             return Disposables.create()

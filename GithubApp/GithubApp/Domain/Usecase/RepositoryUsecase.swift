@@ -8,11 +8,11 @@
 import Foundation
 import RxSwift
 
-protocol RepositoriesFetchable {
+protocol RepositoryFetchable {
     func fetchRepositories(query: String) -> Observable<[Repository]>
 }
 
-struct RepositoriesUsecase: RepositoriesFetchable {
+struct RepositoryUsecase: RepositoryFetchable {
     func fetchRepositories(query: String) -> Observable<[Repository]> {
         return NetworkManager.fetchDataObservable(query: query, decodingType: Results.self)
             .map { results in
