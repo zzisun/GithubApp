@@ -80,7 +80,7 @@
 
 * 코드를 기반으로 UI를 구현하였습니다. 
 
-* SnapKit을 직관적이고 간결하게 autolayout을 구현하였습니다.
+* SnapKit을 사용하여 직관적이고 간결하게 autolayout을 구현하였습니다.
 
 * xib를 사용하여 TableViewCell 커스텀하여 RepositoryCell을 구현하였습니다.
 
