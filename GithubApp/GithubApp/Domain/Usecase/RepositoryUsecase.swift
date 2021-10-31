@@ -13,8 +13,14 @@ protocol RepositoryFetchable {
 }
 
 struct RepositoryUsecase: RepositoryFetchable {
+    private let networkManager: NetworkManagable
+    
+    init(networkManager: NetworkManagable) {
+        self.networkManager = networkManager
+    }
+    
     func fetchRepositories(query: String) -> Observable<[Repository]> {
-        return NetworkManager.shared.fetchDataObservable(query: query, decodingType: Results.self)
+        return networkManager.fetchDataObservable(query: query, decodingType: Results.self)
             .map { results in
                 return results.repositories
             }

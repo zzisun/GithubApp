@@ -10,11 +10,11 @@ import Alamofire
 import RxSwift
 
 final class NetworkManager: NetworkManagable {
-    static let shared = NetworkManager() // 싱글톤 말고
-    // init() {여기서 인스턴스 생성하기}
+    private let requestManager: RequestManagable
     
-    private let requestManager = RequestManager() // 여기서 선언하지 말고
-    // var requestManager: RequestManagerable!
+    init(requestManager: RequestManagable) {
+        self.requestManager = requestManager
+    }
     
     func search<T: Decodable>(query: String,
                               decodingType: T.Type,
@@ -42,7 +42,7 @@ final class NetworkManager: NetworkManagable {
     
     func fetchDataObservable<T: Decodable>(query: String, decodingType: T.Type) -> Observable<T> {
         return Observable.create { emitter in
-            NetworkManager.shared.search(query: query, decodingType: T.self) { result in
+            self.search(query: query, decodingType: T.self) { result in
                 switch result {
                 case .success(let data):
                     emitter.onNext(data)

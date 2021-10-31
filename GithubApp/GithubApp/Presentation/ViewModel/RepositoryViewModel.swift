@@ -16,6 +16,7 @@ protocol RepositoryViewModelType {
 }
 
 final class RepositoryViewModel: RepositoryViewModelType {
+    private let repositoryUsecase : RepositoryFetchable // private 안하고 protocol에 추가해야될까?
     private let disposeBag = DisposeBag()
     var query: String
     
@@ -23,14 +24,15 @@ final class RepositoryViewModel: RepositoryViewModelType {
     let activated: Observable<Bool>
     let errorMessage: Observable<NetworkError>
     
-    init(query: String, domain: RepositoryFetchable = RepositoryUsecase()) {
+    init(query: String, repositoryUsecase : RepositoryFetchable) {
+        self.repositoryUsecase = repositoryUsecase
         self.query = query
         repositories = BehaviorSubject<[Repository]>(value: [])
         let activating = BehaviorSubject<Bool>(value: false)
         let errorSubject = PublishSubject<NetworkError>()
         
         activating.onNext(true)
-        domain.fetchRepositories(query: query)
+        repositoryUsecase.fetchRepositories(query: query)
             .do(onNext: { _ in activating.onNext(false) })
                 .do(onError: { error in errorSubject.onNext((error as? NetworkError) ?? NetworkError.unknown) })
             .subscribe(onNext: repositories.onNext)

@@ -21,7 +21,10 @@ final class ResultViewController: UIViewController {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = RepositoryViewModel(query: " ") 
+        let requestManager = RequestManager()
+        let networkManager = NetworkManager(requestManager: requestManager)
+        let repositoryUsecase = RepositoryUsecase(networkManager: networkManager)
+        viewModel = RepositoryViewModel(query: " ", repositoryUsecase: repositoryUsecase)
         super.init(coder: aDecoder)
     }
     
@@ -37,8 +40,8 @@ final class ResultViewController: UIViewController {
     }
     
     // MARK: - UI
-    var tableView: UITableView! // 이렇게 선언하면 위험하다 let으로 선언하고 인스턴스를 안전하게 생성하도록!
-    var activityIndicator: UIActivityIndicatorView!
+    private let tableView =  UITableView()
+    private let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     private func configure() {
         setNavigationBar()
         setTableView()
@@ -48,14 +51,12 @@ final class ResultViewController: UIViewController {
         navigationItem.title = "Repositories"
         navigationController?.navigationBar.prefersLargeTitles = false
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let barButton = UIBarButtonItem(customView: activityIndicator)
         self.navigationItem.setRightBarButton(barButton, animated: true)
         activityIndicator.isHidden = true
     }
     
     private func setTableView() {
-        tableView = UITableView()
         registerXib()
         view.addSubview(tableView)
         
