@@ -12,9 +12,6 @@
 		7625A4A427218F8700B9E526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4A327218F8700B9E526 /* SceneDelegate.swift */; };
 		7625A4A627218F8700B9E526 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4A527218F8700B9E526 /* HomeViewController.swift */; };
 		7625A4AB27218F8900B9E526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7625A4AA27218F8900B9E526 /* Assets.xcassets */; };
-		7625A4B927218F8900B9E526 /* GithubAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4B827218F8900B9E526 /* GithubAppTests.swift */; };
-		7625A4C327218F8900B9E526 /* GithubAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4C227218F8900B9E526 /* GithubAppUITests.swift */; };
-		7625A4C527218F8900B9E526 /* GithubAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4C427218F8900B9E526 /* GithubAppUITestsLaunchTests.swift */; };
 		7625A4D32721961A00B9E526 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7625A4D22721961A00B9E526 /* .swiftlint.yml */; };
 		7625A4DB2721A8DA00B9E526 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4DA2721A8DA00B9E526 /* Repository.swift */; };
 		7625A4DD2721A9FD00B9E526 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7625A4DC2721A9FD00B9E526 /* Owner.swift */; };
@@ -62,10 +59,7 @@
 		7625A4AA27218F8900B9E526 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7625A4AF27218F8900B9E526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7625A4B427218F8900B9E526 /* GithubAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7625A4B827218F8900B9E526 /* GithubAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAppTests.swift; sourceTree = "<group>"; };
 		7625A4BE27218F8900B9E526 /* GithubAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7625A4C227218F8900B9E526 /* GithubAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAppUITests.swift; sourceTree = "<group>"; };
-		7625A4C427218F8900B9E526 /* GithubAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7625A4D22721961A00B9E526 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7625A4DA2721A8DA00B9E526 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		7625A4DC2721A9FD00B9E526 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
@@ -128,8 +122,6 @@
 				7625A4D22721961A00B9E526 /* .swiftlint.yml */,
 				7625A4DF2721AEC700B9E526 /* Secret.swift */,
 				7625A4A027218F8700B9E526 /* GithubApp */,
-				7625A4B727218F8900B9E526 /* GithubAppTests */,
-				7625A4C127218F8900B9E526 /* GithubAppUITests */,
 				7625A49F27218F8700B9E526 /* Products */,
 				0722B2ED8A723852C4CB2777 /* Pods */,
 				9ABC33E0D675E65A93A7F278 /* Frameworks */,
@@ -158,23 +150,6 @@
 				7625A4D42721A53F00B9E526 /* Presentation */,
 			);
 			path = GithubApp;
-			sourceTree = "<group>";
-		};
-		7625A4B727218F8900B9E526 /* GithubAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				7625A4B827218F8900B9E526 /* GithubAppTests.swift */,
-			);
-			path = GithubAppTests;
-			sourceTree = "<group>";
-		};
-		7625A4C127218F8900B9E526 /* GithubAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7625A4C227218F8900B9E526 /* GithubAppUITests.swift */,
-				7625A4C427218F8900B9E526 /* GithubAppUITestsLaunchTests.swift */,
-			);
-			path = GithubAppUITests;
 			sourceTree = "<group>";
 		};
 		7625A4D42721A53F00B9E526 /* Presentation */ = {
@@ -514,7 +489,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7625A4B927218F8900B9E526 /* GithubAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,8 +496,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7625A4C327218F8900B9E526 /* GithubAppUITests.swift in Sources */,
-				7625A4C527218F8900B9E526 /* GithubAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

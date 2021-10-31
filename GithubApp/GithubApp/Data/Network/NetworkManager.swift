@@ -10,9 +10,11 @@ import Alamofire
 import RxSwift
 
 final class NetworkManager: NetworkManagable {
-    static let shared = NetworkManager()
+    static let shared = NetworkManager() // 싱글톤 말고
+    // init() {여기서 인스턴스 생성하기}
     
-    private let requestManager = RequestManager()
+    private let requestManager = RequestManager() // 여기서 선언하지 말고
+    // var requestManager: RequestManagerable!
     
     func search<T: Decodable>(query: String,
                               decodingType: T.Type,

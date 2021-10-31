@@ -35,6 +35,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else {return}
+        // 여기서 usecase networkmanager 생성해서 의존성 주입
         let repositoryViewModel = RepositoryViewModel(query: query)
         let resultViewController = ResultViewController(viewModel: repositoryViewModel) 
         navigationController?.pushViewController(resultViewController, animated: false)

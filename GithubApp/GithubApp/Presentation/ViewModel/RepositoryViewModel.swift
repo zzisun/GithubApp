@@ -15,7 +15,7 @@ protocol RepositoryViewModelType {
     var errorMessage: Observable<NetworkError> { get }
 }
 
-class RepositoryViewModel: RepositoryViewModelType {
+final class RepositoryViewModel: RepositoryViewModelType {
     private let disposeBag = DisposeBag()
     var query: String
     
