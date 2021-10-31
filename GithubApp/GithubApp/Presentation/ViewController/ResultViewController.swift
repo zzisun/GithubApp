@@ -38,7 +38,6 @@ final class ResultViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         disposeBag = DisposeBag()
     }
-    
     // MARK: - UI
     private let tableView =  UITableView()
     private let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
