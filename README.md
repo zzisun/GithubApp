@@ -28,7 +28,7 @@
 
 
 
-​<img src="https://user-images.githubusercontent.com/60323625/138777728-172229be-8a2f-4d6b-be26-3a0add8db225.gif" alt="앱의 전반적인 흐름" width=280>
+​<img src="https://user-images.githubusercontent.com/60323625/139621744-432cb6b1-7c7f-4773-bc6b-6d30a4bd10d7.gif" alt="앱의 전반적인 흐름" width=280>
 
 * 검색창에 검색어를 입력하지 않고 리포지토리를 검색하는 경우와 같이 오류가 발생하면 alert창을 띄워 사용자에게 알린 뒤 이전화면으로 돌아가게 됩니다.
 
