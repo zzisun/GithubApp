@@ -45,4 +45,8 @@ final class RepositoryCell: UITableViewCell {
         self.starCountLabel.text = starCount(with: repository.starCount)
         self.languageLabel.text = repository.language
     }
+    
+    override func prepareForReuse() {
+        self.ownerImageView.image = UIImage(named: "placeholderImage")
+    }
 }
