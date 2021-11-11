@@ -29,9 +29,6 @@ final class RepositoryCell: UITableViewCell {
     }
     
     func configure(repository: Repository) {
-        // cell이 재사용되다보니 스크롤 하면서 이미지가 해당하는 위치에 표시되지 않는 오류가 발생할 수 있다.
-        // 해결방법: 이미지 url과함께 이미지 id를 저장시킨 후 cell이 표시하는 repo의 id와 같은지 표시
-        // 화면이 넘어가면 이미지로드를 cancel하는 경우
         ImageLoadManager.load(from: repository.owner.avatarURL)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { image in
